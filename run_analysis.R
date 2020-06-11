@@ -38,23 +38,21 @@ tot_y <- inner_join(tot_y, descriptive_names, by = "ActivityCode")
 merged <- cbind(tot_subject, tot_y, tot_x)
 
 ##Extract the mean and std deviation measurements
-##using dplyr select function to select subject, activitycode, and all columns containing mean and std
-measurements <- select(merged, Subject, ActivityName, contains("mean"), contains("std"))
+##using dplyr select function to select subject, activitycode, and all measurements containing mean and std
+measurements <- select(merged, Subject, ActivityName, contains("-mean()"), contains("-std()"))
 
 ##Appropriately labels the data set with descriptive variable names.
 colnames(measurements) <- gsub("^[0-9]+ ", "", colnames(measurements))
+colnames(measurements) <- gsub("-", "", colnames(measurements))
 colnames(measurements) <- gsub("Acc", "Accelerometer", colnames(measurements))
 colnames(measurements) <- gsub("Gyro", "Gyroscope", colnames(measurements))
-colnames(measurements) <- gsub("BodyBody", "Body", colnames(measurements))
 colnames(measurements) <- gsub("Mag", "Magnitude", colnames(measurements))
+colnames(measurements) <- gsub("BodyBody", "Body", colnames(measurements))
 colnames(measurements) <- gsub("^t", "Time", colnames(measurements))
 colnames(measurements) <- gsub("^f", "Frequency", colnames(measurements))
-colnames(measurements) <- gsub("-mean\\(\\)", "Mean", colnames(measurements), ignore.case = TRUE)
-colnames(measurements) <- gsub("-std\\(\\)", "StandardDeviation", colnames(measurements), ignore.case = TRUE)
-colnames(measurements) <- gsub("freq\\(\\)", "Frequency", colnames(measurements), ignore.case = TRUE)
-colnames(measurements) <- gsub("angle", "Angle", colnames(measurements))
-colnames(measurements) <- gsub("gravity", "Gravity", colnames(measurements))
-colnames(measurements) <- gsub("-", "", colnames(measurements))
+colnames(measurements) <- gsub("mean\\(\\)", "Mean", colnames(measurements))
+colnames(measurements) <- gsub("std\\(\\)", "StandardDeviation", colnames(measurements))
+
 
 ##Creating a second, independent tidy data set with the average of each variable for each activity and each subject.
 grouped_data <- group_by(measurements, Subject, ActivityName)
