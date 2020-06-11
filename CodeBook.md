@@ -1,4 +1,4 @@
-### CodeBook
+# CodeBook
 
 ## Intro
 
@@ -75,7 +75,7 @@ The complete list of variables of each feature vector is available in 'features.
 
 From this downloaded data set, the run_analysis.R script performs a series of transformations to this data in order to produce a final file which is written as tidydata.txt. The list of these transformations is below.
 
-# Merging Training and Test Data into one data frame.
+### Merging Training and Test Data into one data frame.
 
 The original dataset separated the data into training and test sets. After reading in all the provided text files into R with read.table function, I merged each set together using the rbind function, namely:
 
@@ -89,13 +89,13 @@ Finally, I combined all these columns using cbind to create one data frame
 
 Exact code can be found in run_analysis.R file
 
-# Extracts only the measurements on the mean and standard deviation for each measurement.
+### Extracts only the measurements on the mean and standard deviation for each measurement.
 
 We only focused on the measurements for mean and standard deviation, so we extracted them from this using the select function in the dplyr function, selecting our subject, ActivityName and all columns containing -mean() or -std() as these indicated mean and standard deviation measurements
 
 Exact code can be found in run_analysis.R file
 
-# Appropriately labels the data set with descriptive variable names
+### Appropriately labels the data set with descriptive variable names
 
 I wanted to rename the column headers in order to allow for more readability. To this end, a series of gsub() functions were applied to substitute special characters and clear up abbreviations.
 
@@ -110,7 +110,7 @@ Column Names beginning with f and t were changed to begin with "Frequency"" and 
 
 Exact code can be found in run_analysis.R file
 
-# Create a second independent tidy data set with the average of each variable for each activity and each subject
+### Create a second independent tidy data set with the average of each variable for each activity and each subject
 
 Finally our last transformation provided averages for each variable grouped by subject and activity name. This was accomplished via the group_by and summarize_all functions in the dplyr package.
 
