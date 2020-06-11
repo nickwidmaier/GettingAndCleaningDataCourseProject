@@ -99,7 +99,7 @@ Exact code can be found in run_analysis.R file
 
 I wanted to rename the column headers in order to allow for more readability. To this end, a series of gsub() functions were applied to substitute special characters and clear up abbreviations.
 
-Essentially:
+Essentially:<br/>
 All special characters removed<br/>
 Column Names beginning with f and t were changed to begin with "Frequency"" and "Time" respectively<br/>
 "Acc" was replaced with "Accelerometer"<br/>
